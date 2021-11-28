@@ -1,10 +1,12 @@
 import React, {useRef, useState} from 'react';
 import styled from "styled-components";
 import {Button} from "@material-ui/core";
-import {db} from "../firebase";
+import {auth, db} from "../firebase";
 import firebase from 'firebase';
+import {useAuthState} from "react-firebase-hooks/auth";
 
 function ChatInput({channelId, channelName, chatRef}) {
+    const [user] = useAuthState(auth);
     const [input, setInput] = useState('');
     const sendMessage = e => {
         e.preventDefault();
@@ -16,8 +18,8 @@ function ChatInput({channelId, channelName, chatRef}) {
             .add({
                 message: input,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                user: 'dsad',
-                userImage: 'https://media.istockphoto.com/photos/millennial-male-team-leader-organize-virtual-workshop-with-employees-picture-id1300972574?b=1&k=20&m=1300972574&s=170667a&w=0&h=2nBGC7tr0kWIU8zRQ3dMg-C5JLo9H2sNUuDjQ5mlYfo='
+                user: user.displayName,
+                userImage: user.photoURL,
             });
         setInput('');
     }

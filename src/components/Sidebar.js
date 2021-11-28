@@ -13,15 +13,17 @@ import AppsIcon from '@mui/icons-material/Apps';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import {useCollection} from "react-firebase-hooks/firestore";
-import {db} from "../firebase";
+import {auth, db} from "../firebase";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 function Sidebar() {
+    const [user] = useAuthState(auth);
     const [channels, loading, error] = useCollection(db.collection('chatRooms'));
     return (
         <SidebarContainer>
             <SidebarHeader>
                 <ProfileInfo>
-                    <h2>Name Surname</h2>
+                    <h2>{user.displayName}</h2>
                     <h3>
                         <FiberManualRecordIcon/>
                         Test Testovsky

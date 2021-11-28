@@ -11,6 +11,16 @@ import Login from "./components/Login";
 
 function App() {
     const [user, loading] = useAuthState(auth)
+    if (loading) {
+        return (
+            <AppLoading>
+                <AppLoadingContents>
+                    <img src="https://cdn2.downdetector.com/static/uploads/logo/Slack_RGB.png" alt="slack"/>
+                    <img src="https://dreamdesignagency.com/wp-content/uploads/2021/11/1474-2.gif" alt=""/>
+                </AppLoadingContents>
+            </AppLoading>
+        );
+    }
     return (
         <div className="App">
             <Router>
@@ -39,3 +49,24 @@ const AppMain = styled.div`
   display: flex;
   height: 100vh;
 `;
+const AppLoading = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100%;
+`
+
+const AppLoadingContents = styled.div`
+  text-align: center;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > img {
+    height: 100px;
+    padding: 20px;
+    margin-bottom: 40px;
+  }
+`
