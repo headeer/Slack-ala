@@ -42,7 +42,7 @@ function Sidebar() {
             <hr/>
             <SidebarOption Icon={AddIcon} addChannelOption title="Add channels"/>
             {channels?.docs.map(doc => (
-                <SidebarOption key={doc.id} title={doc.data().name} />
+                <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
             ))}
         </SidebarContainer>
     );
@@ -76,6 +76,8 @@ const SidebarHeader = styled.div`
     color: #49274b;
     font-size: 18px;
     background-color: white;
+    width: 2em;
+    height: 2em;
     border-radius: 999px;
   }
 `
